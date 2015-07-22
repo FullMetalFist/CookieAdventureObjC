@@ -26,6 +26,7 @@
 		7CD570A31B5FE1EE00C50D16 /* Level_3.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CD5709E1B5FE1EE00C50D16 /* Level_3.json */; };
 		7CD570A41B5FE1EE00C50D16 /* Level_4.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CD5709F1B5FE1EE00C50D16 /* Level_4.json */; };
 		7CD570A71B5FE23A00C50D16 /* RWTTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD570A61B5FE23A00C50D16 /* RWTTile.m */; };
+		7CD570AA1B5FFE7000C50D16 /* RWTSwap.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD570A91B5FFE7000C50D16 /* RWTSwap.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		7CD5709F1B5FE1EE00C50D16 /* Level_4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_4.json; sourceTree = "<group>"; };
 		7CD570A51B5FE23A00C50D16 /* RWTTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWTTile.h; sourceTree = "<group>"; };
 		7CD570A61B5FE23A00C50D16 /* RWTTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWTTile.m; sourceTree = "<group>"; };
+		7CD570A81B5FFE7000C50D16 /* RWTSwap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWTSwap.h; sourceTree = "<group>"; };
+		7CD570A91B5FFE7000C50D16 /* RWTSwap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWTSwap.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +117,8 @@
 				7CD5702C1B5ED05C00C50D16 /* GameScene.m */,
 				7CD570571B5EDBEC00C50D16 /* RWTGameScene.h */,
 				7CD570581B5EDBEC00C50D16 /* RWTGameScene.m */,
+				7CD570A81B5FFE7000C50D16 /* RWTSwap.h */,
+				7CD570A91B5FFE7000C50D16 /* RWTSwap.m */,
 				7CD570511B5ED19F00C50D16 /* RWTCookie.h */,
 				7CD570521B5ED19F00C50D16 /* RWTCookie.m */,
 				7CD570541B5ED5BD00C50D16 /* RWTLevel.h */,
@@ -290,6 +295,7 @@
 				7CD570531B5ED19F00C50D16 /* RWTCookie.m in Sources */,
 				7CD570271B5ED05C00C50D16 /* main.m in Sources */,
 				7CD570A71B5FE23A00C50D16 /* RWTTile.m in Sources */,
+				7CD570AA1B5FFE7000C50D16 /* RWTSwap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

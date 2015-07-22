@@ -112,4 +112,19 @@
     return dictionary;
 }
 
+- (void)performSwap:(RWTSwap *)swap {
+    NSInteger columnA = swap.cookieA.column;
+    NSInteger rowA = swap.cookieA.row;
+    NSInteger columnB = swap.cookieB.column;
+    NSInteger rowB = swap.cookieB.row;
+    
+    _cookies[columnA][rowA] = swap.cookieB;
+    swap.cookieB.column = columnA;
+    swap.cookieB.row = rowA;
+    
+    _cookies[columnB][rowB] = swap.cookieA;
+    swap.cookieA.column = columnB;
+    swap.cookieA.row = rowB;
+}
+
 @end

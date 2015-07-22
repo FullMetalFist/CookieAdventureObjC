@@ -11,6 +11,7 @@
 
 #import "RWTCookie.h"
 #import "RWTLevel.h"
+#import "RWTSwap.h"
 
 static const CGFloat TileWidth = 32.0;
 static const CGFloat TileHeight = 36.0;
@@ -168,6 +169,29 @@ static const CGFloat TileHeight = 36.0;
     RWTCookie *fromCookie = [self.level cookieAtColumn:self.swipeFromColumn row:self.swipeFromRow];
     
     NSLog(@"*** swapping %@ with %@", fromCookie, toCookie);
+    if (self.swipeHandler != nil) {
+        RWTSwap *swap = [[RWTSwap alloc] init];
+        swap.cookieA = fromCookie;
+        swap.cookieB = toCookie;
+        
+        self.swipeHandler(swap);
+    }
+}
+
+- (void)animateSwap:(RWTSwap *)swap completion:(dispatch_block_t)completion {
+    // put the cookie you started with on top
+    swap.cookieA.sprite.zPosition = 100;
+    swap.cookieB.sprite.zPosition = 90;
+    
+    const NSTimeInterval Duration = 0.3;
+    
+    SKAction *moveA = [SKAction moveTo:swap.cookieB.sprite.position duration:Duration];
+    moveA.timingMode = SKActionTimingEaseOut;
+    [swap.cookieA.sprite runAction:[SKAction sequence:@[moveA, [SKAction runBlock:completion]]]];
+    
+    SKAction *moveB = [SKAction moveTo:swap.cookieA.sprite.position duration:Duration];
+    moveB.timingMode = SKActionTimingEaseOut;
+    [swap.cookieB.sprite runAction:moveB];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {

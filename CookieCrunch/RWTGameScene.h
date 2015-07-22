@@ -9,12 +9,17 @@
 @import SpriteKit;
 
 @class RWTLevel;
+@class RWTSwap;
 
 @interface RWTGameScene : SKScene
 
 @property (nonatomic) RWTLevel *level;
 
+@property (copy, nonatomic) void (^swipeHandler)(RWTSwap *swap);
+
 - (void)addTiles;
 - (void)addSpritesForCookies:(NSSet *)cookies;
+
+- (void)animateSwap:(RWTSwap *)swap completion:(dispatch_block_t)completion;
 
 @end
