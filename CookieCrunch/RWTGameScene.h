@@ -14,6 +14,7 @@
 
 @property (nonatomic) RWTLevel *level;
 
+- (void)addTiles;
 - (void)addSpritesForCookies:(NSSet *)cookies;
 
 @end
