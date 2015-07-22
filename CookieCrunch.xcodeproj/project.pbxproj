@@ -20,6 +20,12 @@
 		7CD570531B5ED19F00C50D16 /* RWTCookie.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD570521B5ED19F00C50D16 /* RWTCookie.m */; };
 		7CD570561B5ED5BD00C50D16 /* RWTLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD570551B5ED5BD00C50D16 /* RWTLevel.m */; };
 		7CD570591B5EDBEC00C50D16 /* RWTGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD570581B5EDBEC00C50D16 /* RWTGameScene.m */; };
+		7CD570A01B5FE1EE00C50D16 /* Level_0.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CD5709B1B5FE1EE00C50D16 /* Level_0.json */; };
+		7CD570A11B5FE1EE00C50D16 /* Level_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CD5709C1B5FE1EE00C50D16 /* Level_1.json */; };
+		7CD570A21B5FE1EE00C50D16 /* Level_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CD5709D1B5FE1EE00C50D16 /* Level_2.json */; };
+		7CD570A31B5FE1EE00C50D16 /* Level_3.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CD5709E1B5FE1EE00C50D16 /* Level_3.json */; };
+		7CD570A41B5FE1EE00C50D16 /* Level_4.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CD5709F1B5FE1EE00C50D16 /* Level_4.json */; };
+		7CD570A71B5FE23A00C50D16 /* RWTTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD570A61B5FE23A00C50D16 /* RWTTile.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +62,13 @@
 		7CD570551B5ED5BD00C50D16 /* RWTLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWTLevel.m; sourceTree = "<group>"; };
 		7CD570571B5EDBEC00C50D16 /* RWTGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWTGameScene.h; sourceTree = "<group>"; };
 		7CD570581B5EDBEC00C50D16 /* RWTGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWTGameScene.m; sourceTree = "<group>"; };
+		7CD5709B1B5FE1EE00C50D16 /* Level_0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_0.json; sourceTree = "<group>"; };
+		7CD5709C1B5FE1EE00C50D16 /* Level_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_1.json; sourceTree = "<group>"; };
+		7CD5709D1B5FE1EE00C50D16 /* Level_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_2.json; sourceTree = "<group>"; };
+		7CD5709E1B5FE1EE00C50D16 /* Level_3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_3.json; sourceTree = "<group>"; };
+		7CD5709F1B5FE1EE00C50D16 /* Level_4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_4.json; sourceTree = "<group>"; };
+		7CD570A51B5FE23A00C50D16 /* RWTTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWTTile.h; sourceTree = "<group>"; };
+		7CD570A61B5FE23A00C50D16 /* RWTTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWTTile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,9 +118,12 @@
 				7CD570521B5ED19F00C50D16 /* RWTCookie.m */,
 				7CD570541B5ED5BD00C50D16 /* RWTLevel.h */,
 				7CD570551B5ED5BD00C50D16 /* RWTLevel.m */,
+				7CD570A51B5FE23A00C50D16 /* RWTTile.h */,
+				7CD570A61B5FE23A00C50D16 /* RWTTile.m */,
 				7CD5702E1B5ED05C00C50D16 /* GameScene.sks */,
 				7CD570331B5ED05C00C50D16 /* Main.storyboard */,
 				7CD570361B5ED05C00C50D16 /* Images.xcassets */,
+				7CD570901B5FE1D200C50D16 /* Levels */,
 				7CD5704F1B5ED0DA00C50D16 /* Sprites.atlas */,
 				7CD570381B5ED05C00C50D16 /* LaunchScreen.xib */,
 				7CD570241B5ED05C00C50D16 /* Supporting Files */,
@@ -143,6 +159,19 @@
 				7CD570441B5ED05C00C50D16 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7CD570901B5FE1D200C50D16 /* Levels */ = {
+			isa = PBXGroup;
+			children = (
+				7CD5709B1B5FE1EE00C50D16 /* Level_0.json */,
+				7CD5709C1B5FE1EE00C50D16 /* Level_1.json */,
+				7CD5709D1B5FE1EE00C50D16 /* Level_2.json */,
+				7CD5709E1B5FE1EE00C50D16 /* Level_3.json */,
+				7CD5709F1B5FE1EE00C50D16 /* Level_4.json */,
+			);
+			name = Levels;
+			path = Sprites.atlas/Levels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,9 +255,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CD570A11B5FE1EE00C50D16 /* Level_1.json in Resources */,
+				7CD570A41B5FE1EE00C50D16 /* Level_4.json in Resources */,
+				7CD570A31B5FE1EE00C50D16 /* Level_3.json in Resources */,
 				7CD5703A1B5ED05C00C50D16 /* LaunchScreen.xib in Resources */,
+				7CD570A01B5FE1EE00C50D16 /* Level_0.json in Resources */,
 				7CD570371B5ED05C00C50D16 /* Images.xcassets in Resources */,
 				7CD5702F1B5ED05C00C50D16 /* GameScene.sks in Resources */,
+				7CD570A21B5FE1EE00C50D16 /* Level_2.json in Resources */,
 				7CD570351B5ED05C00C50D16 /* Main.storyboard in Resources */,
 				7CD570501B5ED0DA00C50D16 /* Sprites.atlas in Resources */,
 			);
@@ -255,6 +289,7 @@
 				7CD5702D1B5ED05C00C50D16 /* GameScene.m in Sources */,
 				7CD570531B5ED19F00C50D16 /* RWTCookie.m in Sources */,
 				7CD570271B5ED05C00C50D16 /* main.m in Sources */,
+				7CD570A71B5FE23A00C50D16 /* RWTTile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +484,7 @@
 				7CD5704B1B5ED05C00C50D16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7CD5704C1B5ED05C00C50D16 /* Build configuration list for PBXNativeTarget "CookieCrunchTests" */ = {
 			isa = XCConfigurationList;
@@ -457,6 +493,7 @@
 				7CD5704E1B5ED05C00C50D16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

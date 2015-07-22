@@ -15,6 +15,7 @@
         @"Croissant",
         @"Cupcake",
         @"Danish",
+        @"Donut",
         @"Macaroon",
         @"SugarCookie",
     };
@@ -26,6 +27,7 @@
         @"Croissant-Highlighted",
         @"Cupcake-Highlighted",
         @"Danish-Highlighted",
+        @"Donut-Highlighted",
         @"Macaroon-Highlighted",
         @"SugarCookie-Highlighted",
     };

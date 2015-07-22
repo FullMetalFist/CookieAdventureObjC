@@ -8,13 +8,18 @@
 
 #import <Foundation/Foundation.h>
 #import "RWTCookie.h"
+#import "RWTTile.h"
 
 static const NSInteger NumColumns = 9;
 static const NSInteger NumRows = 9;
 
 @interface RWTLevel : NSObject
 
+- (instancetype)initWithFile:(NSString *)filename;
+
 - (NSSet *)shuffle;
 - (RWTCookie *)cookieAtColumn:(NSInteger)column row:(NSInteger)row;
+
+- (RWTTile *)tileAtColumn:(NSInteger)column row:(NSInteger)row;
 
 @end

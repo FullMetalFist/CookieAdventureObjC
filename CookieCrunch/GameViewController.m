@@ -52,7 +52,7 @@
     self.scene.scaleMode = SKSceneScaleModeAspectFill;
     
     // Load the level
-    self.level = [[RWTLevel alloc] init];
+    self.level = [[RWTLevel alloc] initWithFile:@"Level_1"];
     self.scene.level = self.level;
     
     // Present the scene.
