@@ -21,5 +21,6 @@
 - (void)addSpritesForCookies:(NSSet *)cookies;
 
 - (void)animateSwap:(RWTSwap *)swap completion:(dispatch_block_t)completion;
+- (void)animateInvalidSwap:(RWTSwap *)swap completion:(dispatch_block_t)completion;
 
 @end

@@ -202,6 +202,22 @@ static const CGFloat TileHeight = 36.0;
     [swap.cookieB.sprite runAction:moveB];
 }
 
+- (void)animateInvalidSwap:(RWTSwap *)swap completion:(dispatch_block_t)completion {
+    swap.cookieA.sprite.zPosition = 100;
+    swap.cookieB.sprite.zPosition = 90;
+    
+    const NSTimeInterval Duration = 0.2;
+    
+    SKAction *moveA = [SKAction moveTo:swap.cookieB.sprite.position duration:Duration];
+    moveA.timingMode = SKActionTimingEaseOut;
+    
+    SKAction *moveB = [SKAction moveTo:swap.cookieA.sprite.position duration:Duration];
+    moveB.timingMode = SKActionTimingEaseOut;
+    
+    [swap.cookieA.sprite runAction:[SKAction sequence:@[moveA, moveB, [SKAction runBlock:completion]]]];
+    [swap.cookieB.sprite runAction:[SKAction sequence:@[moveB, moveA]]];
+}
+
 - (void)showSelectionForCookie:(RWTCookie *)cookie {
     // if the selection indicator is still visible, then first remove it.
     if (self.selectionSprite.parent != nil) {
@@ -217,7 +233,7 @@ static const CGFloat TileHeight = 36.0;
 }
 
 - (void)hideSelectionIndicator {
-    [self.selectionSprite runAction:[SKAction sequence:@[[SKAction fadeOutWithDuration:0.5],[SKAction removeFromParent]]]];
+    [self.selectionSprite runAction:[SKAction sequence:@[[SKAction fadeOutWithDuration:0.7],[SKAction removeFromParent]]]];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {

@@ -60,10 +60,16 @@
     id block = ^(RWTSwap *swap) {
         self.view.userInteractionEnabled = NO;
         
-        [self.level performSwap:swap];
-        [self.scene animateSwap:swap completion:^{
-            self.view.userInteractionEnabled = YES;
-        }];
+        if ([self.level isPossibleSwap:swap]) {
+            [self.level performSwap:swap];
+            [self.scene animateSwap:swap completion:^{
+                self.view.userInteractionEnabled = YES;
+            }];
+        } else {
+            [self.scene animateInvalidSwap:swap completion:^{
+                self.view.userInteractionEnabled = YES;
+            }];
+        }
     };
     self.scene.swipeHandler = block;
     

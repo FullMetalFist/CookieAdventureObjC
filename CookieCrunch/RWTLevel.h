@@ -25,4 +25,6 @@ static const NSInteger NumRows = 9;
 
 - (void)performSwap:(RWTSwap *)swap;
 
+- (BOOL) isPossibleSwap:(RWTSwap *)swap;
+
 @end

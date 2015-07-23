@@ -8,6 +8,12 @@
 
 #import "RWTLevel.h"
 
+@interface RWTLevel()
+
+@property (nonatomic) NSSet *possibleSwaps;
+
+@end
+
 @implementation RWTLevel {
     RWTCookie *_cookies[NumColumns][NumRows];
     RWTTile *_tiles[NumColumns][NumRows];
@@ -47,7 +53,30 @@
 }
 
 - (NSSet *)shuffle {
-    return [self createInitialCookies];
+    NSSet *set;
+    do {
+        set = [self createInitialCookies];
+        
+        [self detectPossibleSwaps];
+        
+        NSLog(@"possible swaps: %@", self.possibleSwaps);
+    } while ([self .possibleSwaps count] == 0);
+    
+    return set;
+}
+
+- (BOOL)hasChainAtColumn:(NSInteger)column row:(NSInteger)row {
+    NSUInteger cookieType = _cookies[column][row].cookieType;
+    
+    NSUInteger horzLength = 1;
+    for (NSInteger i = column - 1; i >= 0 && _cookies[i][row].cookieType == cookieType; i--, horzLength++);
+    for (NSInteger i = column + 1; i < NumColumns && _cookies[i][row].cookieType == cookieType; i++, horzLength++);
+    if (horzLength >= 3) return YES;
+    
+    NSUInteger vertLength = 1;
+    for (NSInteger i = row - 1; i >= 0 &&  _cookies[column][i].cookieType == cookieType; i--, vertLength++);
+    for (NSInteger i = row + 1; i < NumRows && _cookies[column][i].cookieType == cookieType; i++, vertLength++);
+    return (vertLength >= 3);
 }
 
 - (NSSet *)createInitialCookies {
@@ -59,7 +88,12 @@
             
             if (_tiles[column][row]) {
                 // 2
-                NSUInteger cookieType = arc4random_uniform(NumCookieTypes) + 1;
+                NSUInteger cookieType;
+                
+                do {
+                    cookieType = arc4random_uniform(NumCookieTypes) +1;
+                }
+                while ((column >= 2 && _cookies[column - 1][row].cookieType == cookieType && _cookies[column - 2][row].cookieType == cookieType) || (row >= 2 &&  _cookies[column][row - 1].cookieType == cookieType && _cookies[column][row - 2].cookieType == cookieType));
                 
                 // 3
                 RWTCookie *cookie = [self createCookieAtColumn:column row:row withType:cookieType];
@@ -125,6 +159,67 @@
     _cookies[columnB][rowB] = swap.cookieA;
     swap.cookieA.column = columnB;
     swap.cookieA.row = rowB;
+}
+
+- (void)detectPossibleSwaps {
+    NSMutableSet *set = [NSMutableSet set];
+    
+    for (NSInteger row = 0; row < NumRows; row++) {
+        for (NSInteger column = 0; column < NumColumns; column++) {
+            
+            RWTCookie *cookie = _cookies[column][row];
+            if (cookie) {
+                
+                // is it possible to swap this cookie with the one on the right?
+                if (column < NumColumns - 1) {
+                    // have a cookie in this spot? if there is no tile, there is no cookie!
+                    RWTCookie *other = _cookies[column + 1][row];
+                    if (other) {
+                        // swap them!
+                        _cookies[column][row] = other;
+                        _cookies[column + 1][row] = cookie;
+                        
+                        // is either cookie now a part of the chain?
+                        if ([self hasChainAtColumn:column + 1 row:row] || [self hasChainAtColumn:column row:row]) {
+                            RWTSwap *swap = [[RWTSwap alloc] init];
+                            swap.cookieA = cookie;
+                            swap.cookieB = other;
+                            [set addObject:swap];
+                        }
+                        
+                        // swap them back
+                        _cookies[column][row] = cookie;
+                        _cookies[column + 1][row] = other;
+                    }
+                }
+                
+                if (row < NumRows - 1) {
+                    RWTCookie *other = _cookies[column][row + 1];
+                    if (other) {
+                        // swap them!
+                        _cookies[column][row] = other;
+                        _cookies[column][row + 1] = cookie;
+                        
+                        if ([self hasChainAtColumn:column row:row + 1] || [self hasChainAtColumn:column row:row]) {
+                            RWTSwap *swap= [[RWTSwap alloc] init];
+                            swap.cookieA = cookie;
+                            swap.cookieB = other;
+                            [set addObject:swap];
+                        }
+                        
+                        _cookies[column][row] = cookie;
+                        _cookies[column][row + 1] = other;
+                    }
+                }
+            }
+        }
+    }
+    
+    self.possibleSwaps = set;
+}
+
+- (BOOL) isPossibleSwap:(RWTSwap *)swap {
+    return [self.possibleSwaps containsObject:swap];
 }
 
 @end
