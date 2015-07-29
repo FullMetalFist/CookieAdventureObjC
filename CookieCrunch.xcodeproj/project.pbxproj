@@ -26,6 +26,12 @@
 		7CD570591B5EDBEC00C50D16 /* RWTGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD570581B5EDBEC00C50D16 /* RWTGameScene.m */; };
 		7CD570A71B5FE23A00C50D16 /* RWTTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD570A61B5FE23A00C50D16 /* RWTTile.m */; };
 		7CD570AA1B5FFE7000C50D16 /* RWTSwap.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CD570A91B5FFE7000C50D16 /* RWTSwap.m */; };
+		7CE0600E1B69173E002D0D5F /* Chomp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7CE060081B69173E002D0D5F /* Chomp.wav */; };
+		7CE0600F1B69173E002D0D5F /* Drip.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7CE060091B69173E002D0D5F /* Drip.wav */; };
+		7CE060101B69173E002D0D5F /* Error.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7CE0600A1B69173E002D0D5F /* Error.wav */; };
+		7CE060111B69173E002D0D5F /* Ka-Ching.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7CE0600B1B69173E002D0D5F /* Ka-Ching.wav */; };
+		7CE060121B69173E002D0D5F /* Mining by Moonlight.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7CE0600C1B69173E002D0D5F /* Mining by Moonlight.mp3 */; };
+		7CE060131B69173E002D0D5F /* Scrape.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7CE0600D1B69173E002D0D5F /* Scrape.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +75,12 @@
 		7CD570A61B5FE23A00C50D16 /* RWTTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWTTile.m; sourceTree = "<group>"; };
 		7CD570A81B5FFE7000C50D16 /* RWTSwap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWTSwap.h; sourceTree = "<group>"; };
 		7CD570A91B5FFE7000C50D16 /* RWTSwap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWTSwap.m; sourceTree = "<group>"; };
+		7CE060081B69173E002D0D5F /* Chomp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Chomp.wav; sourceTree = "<group>"; };
+		7CE060091B69173E002D0D5F /* Drip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Drip.wav; sourceTree = "<group>"; };
+		7CE0600A1B69173E002D0D5F /* Error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Error.wav; sourceTree = "<group>"; };
+		7CE0600B1B69173E002D0D5F /* Ka-Ching.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Ka-Ching.wav"; sourceTree = "<group>"; };
+		7CE0600C1B69173E002D0D5F /* Mining by Moonlight.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Mining by Moonlight.mp3"; sourceTree = "<group>"; };
+		7CE0600D1B69173E002D0D5F /* Scrape.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Scrape.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +146,7 @@
 				7CD570A61B5FE23A00C50D16 /* RWTTile.m */,
 				7CD5702E1B5ED05C00C50D16 /* GameScene.sks */,
 				7CD570331B5ED05C00C50D16 /* Main.storyboard */,
+				7CE060071B69173E002D0D5F /* Sounds */,
 				7CD570361B5ED05C00C50D16 /* Images.xcassets */,
 				7CD5704F1B5ED0DA00C50D16 /* Sprites.atlas */,
 				7CD570381B5ED05C00C50D16 /* LaunchScreen.xib */,
@@ -171,6 +184,19 @@
 				7CD570441B5ED05C00C50D16 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7CE060071B69173E002D0D5F /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				7CE060081B69173E002D0D5F /* Chomp.wav */,
+				7CE060091B69173E002D0D5F /* Drip.wav */,
+				7CE0600A1B69173E002D0D5F /* Error.wav */,
+				7CE0600B1B69173E002D0D5F /* Ka-Ching.wav */,
+				7CE0600C1B69173E002D0D5F /* Mining by Moonlight.mp3 */,
+				7CE0600D1B69173E002D0D5F /* Scrape.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,13 +282,19 @@
 			files = (
 				7C9CF7461B60538A00C1A3C5 /* Level_1.json in Resources */,
 				7C9CF7491B60538A00C1A3C5 /* Level_4.json in Resources */,
+				7CE060111B69173E002D0D5F /* Ka-Ching.wav in Resources */,
+				7CE060101B69173E002D0D5F /* Error.wav in Resources */,
+				7CE060131B69173E002D0D5F /* Scrape.wav in Resources */,
 				7C9CF7481B60538A00C1A3C5 /* Level_3.json in Resources */,
 				7CD5703A1B5ED05C00C50D16 /* LaunchScreen.xib in Resources */,
 				7C9CF7451B60538A00C1A3C5 /* Level_0.json in Resources */,
 				7CD570371B5ED05C00C50D16 /* Images.xcassets in Resources */,
+				7CE0600E1B69173E002D0D5F /* Chomp.wav in Resources */,
+				7CE0600F1B69173E002D0D5F /* Drip.wav in Resources */,
 				7CD5702F1B5ED05C00C50D16 /* GameScene.sks in Resources */,
 				7C9CF7471B60538A00C1A3C5 /* Level_2.json in Resources */,
 				7CD570351B5ED05C00C50D16 /* Main.storyboard in Resources */,
+				7CE060121B69173E002D0D5F /* Mining by Moonlight.mp3 in Resources */,
 				7CD570501B5ED0DA00C50D16 /* Sprites.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -27,6 +27,13 @@ static const CGFloat TileHeight = 36.0;
 
 @property (nonatomic) SKSpriteNode *selectionSprite;
 
+@property (nonatomic) SKAction *swapSound;
+@property (nonatomic) SKAction *invalidSwapSound;
+@property (nonatomic) SKAction *matchSound;
+@property (nonatomic) SKAction *fallingCookieSound;
+@property (nonatomic) SKAction *addCookieSound;
+
+
 @end
 
 @implementation RWTGameScene
@@ -54,6 +61,7 @@ static const CGFloat TileHeight = 36.0;
         self.swipeFromColumn = self.swipeFromRow = NSNotFound;
         
         self.selectionSprite = [SKSpriteNode node];
+        [self preloadResources];
     }
     return self;
 }
@@ -200,6 +208,7 @@ static const CGFloat TileHeight = 36.0;
     SKAction *moveB = [SKAction moveTo:swap.cookieA.sprite.position duration:Duration];
     moveB.timingMode = SKActionTimingEaseOut;
     [swap.cookieB.sprite runAction:moveB];
+    [self runAction:self.swapSound];
 }
 
 - (void)animateInvalidSwap:(RWTSwap *)swap completion:(dispatch_block_t)completion {
@@ -216,6 +225,7 @@ static const CGFloat TileHeight = 36.0;
     
     [swap.cookieA.sprite runAction:[SKAction sequence:@[moveA, moveB, [SKAction runBlock:completion]]]];
     [swap.cookieB.sprite runAction:[SKAction sequence:@[moveB, moveA]]];
+    [self runAction:self.invalidSwapSound];
 }
 
 - (void)showSelectionForCookie:(RWTCookie *)cookie {
@@ -243,6 +253,14 @@ static const CGFloat TileHeight = 36.0;
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     [self touchesEnded:touches withEvent:event];
+}
+
+- (void)preloadResources {
+    self.swapSound = [SKAction playSoundFileNamed:@"Chomp.wav" waitForCompletion:NO];
+    self.invalidSwapSound = [SKAction playSoundFileNamed:@"Error.wav" waitForCompletion:NO];
+    self.matchSound = [SKAction playSoundFileNamed:@"Ka-Ching.wav" waitForCompletion:NO];
+    self.fallingCookieSound = [SKAction playSoundFileNamed:@"Scrape.wav" waitForCompletion:NO];
+    self.addCookieSound = [SKAction playSoundFileNamed:@"Drip.wav" waitForCompletion:NO];
 }
 
 @end
