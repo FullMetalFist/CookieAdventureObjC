@@ -222,4 +222,81 @@
     return [self.possibleSwaps containsObject:swap];
 }
 
+- (NSSet *)detectHorizontalMatches {
+    // 1
+    NSMutableSet *set = [NSMutableSet set];
+    
+    // 2
+    for (NSInteger row = 0; row < NumRows; row++) {
+        for (NSInteger column = 0; column < NumColumns - 2; ) {
+            
+            // 3
+            if (_cookies[column][row]) {
+                NSUInteger matchType = _cookies[column][row].cookieType;
+                
+                // 4
+                if (_cookies[column + 1][row].cookieType == matchType && _cookies[column +2][row].cookieType == matchType) {
+                    
+                    // 5
+                    RWTChain *chain = [[RWTChain alloc] init];
+                    chain.chainType = ChainTypeHorizontal;
+                    do {
+                        [chain addCookie:_cookies[column][row]];
+                        column++;
+                    } while (column < NumColumns && _cookies[column][row].cookieType == matchType);
+                    [set addObject:chain];
+                    continue;
+                }
+            }
+            // 6
+            column++;
+        }
+    }
+    return set;
+}
+
+- (NSSet *)detectVerticalMatches {
+    NSMutableSet *set = [NSMutableSet set];
+    
+    for (NSInteger column = 0; column < NumColumns; column++) {
+        for (NSInteger row = 0; row < NumRows - 2; ) {
+            if (_cookies[column][row]) {
+                NSUInteger matchType = _cookies[column][row].cookieType;
+                
+                if (_cookies[column][row + 1].cookieType == matchType && _cookies[column][row].cookieType == matchType) {
+                    RWTChain *chain = [[RWTChain alloc] init];
+                    chain.chainType = ChainTypeVertical;
+                    do {
+                        [chain addCookie:_cookies[column][row]];
+                        row++;
+                    } while (row < NumRows && _cookies[column][row].cookieType == matchType);
+                    [set addObject:chain];
+                    continue;
+                }
+            }
+            row++;
+        }
+    }
+    
+    return set;
+}
+
+- (NSSet *)removeMatches {
+    NSSet *horizontalChains = [self detectHorizontalMatches];
+    NSSet *verticalChains = [self detectVerticalMatches];
+    
+    [self removeCookies:horizontalChains];
+    [self removeCookies:verticalChains];
+    
+    return [horizontalChains setByAddingObjectsFromSet:verticalChains];
+}
+
+- (void)removeCookies:(NSSet *)chains {
+    for (RWTChain *chain in chains) {
+        for (RWTCookie *cookie in chain.cookies) {
+            _cookies[cookie.column][cookie.row] = nil;
+        }
+    }
+}
+
 @end

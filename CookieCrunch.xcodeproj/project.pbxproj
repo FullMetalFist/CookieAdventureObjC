@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C23BA501B7A6EBF00EAA59A /* RWTChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C23BA4F1B7A6EBF00EAA59A /* RWTChain.m */; };
 		7C9CF7451B60538A00C1A3C5 /* Level_0.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C9CF7401B60538A00C1A3C5 /* Level_0.json */; };
 		7C9CF7461B60538A00C1A3C5 /* Level_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C9CF7411B60538A00C1A3C5 /* Level_1.json */; };
 		7C9CF7471B60538A00C1A3C5 /* Level_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C9CF7421B60538A00C1A3C5 /* Level_2.json */; };
@@ -45,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7C23BA4E1B7A6EBF00EAA59A /* RWTChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWTChain.h; sourceTree = "<group>"; };
+		7C23BA4F1B7A6EBF00EAA59A /* RWTChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWTChain.m; sourceTree = "<group>"; };
 		7C9CF7401B60538A00C1A3C5 /* Level_0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_0.json; sourceTree = "<group>"; };
 		7C9CF7411B60538A00C1A3C5 /* Level_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_1.json; sourceTree = "<group>"; };
 		7C9CF7421B60538A00C1A3C5 /* Level_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_2.json; sourceTree = "<group>"; };
@@ -140,6 +143,8 @@
 				7CD570A91B5FFE7000C50D16 /* RWTSwap.m */,
 				7CD570511B5ED19F00C50D16 /* RWTCookie.h */,
 				7CD570521B5ED19F00C50D16 /* RWTCookie.m */,
+				7C23BA4E1B7A6EBF00EAA59A /* RWTChain.h */,
+				7C23BA4F1B7A6EBF00EAA59A /* RWTChain.m */,
 				7CD570541B5ED5BD00C50D16 /* RWTLevel.h */,
 				7CD570551B5ED5BD00C50D16 /* RWTLevel.m */,
 				7CD570A51B5FE23A00C50D16 /* RWTTile.h */,
@@ -318,6 +323,7 @@
 				7CD570321B5ED05C00C50D16 /* GameViewController.m in Sources */,
 				7CD5702A1B5ED05C00C50D16 /* AppDelegate.m in Sources */,
 				7CD570531B5ED19F00C50D16 /* RWTCookie.m in Sources */,
+				7C23BA501B7A6EBF00EAA59A /* RWTChain.m in Sources */,
 				7CD570271B5ED05C00C50D16 /* main.m in Sources */,
 				7CD570A71B5FE23A00C50D16 /* RWTTile.m in Sources */,
 				7CD570AA1B5FFE7000C50D16 /* RWTSwap.m in Sources */,

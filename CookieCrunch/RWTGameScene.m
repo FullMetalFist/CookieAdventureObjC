@@ -263,4 +263,27 @@ static const CGFloat TileHeight = 36.0;
     self.addCookieSound = [SKAction playSoundFileNamed:@"Drip.wav" waitForCompletion:NO];
 }
 
+- (void)animateMatchedCookies:(NSSet *)chains completion:(dispatch_block_t)completion {
+    for (RWTChain *chain in chains) {
+        for (RWTCookie *cookie in chain.cookies) {
+            // 1
+            if (cookie.sprite) {
+                
+                // 2
+                SKAction *scaleAction = [SKAction scaleTo:0.1 duration:0.3];
+                scaleAction.timingMode = SKActionTimingEaseOut;
+                [cookie.sprite runAction:[SKAction sequence:@[scaleAction, [SKAction removeFromParent]]]];
+                
+                // 3
+                cookie.sprite = nil;
+            }
+        }
+    }
+    
+    [self runAction:self.matchSound];
+    
+    // 4
+    [self runAction:[SKAction sequence:@[[SKAction waitForDuration:0.3], [SKAction runBlock:completion]]]];
+}
+
 @end
