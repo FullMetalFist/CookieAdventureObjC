@@ -30,4 +30,6 @@ static const NSInteger NumRows = 9;
 
 - (NSSet *)removeMatches;
 
+- (NSArray *)fillHoles;
+
 @end

@@ -93,7 +93,10 @@
     NSSet *chains = [self.level removeMatches];
     
     [self.scene animateMatchedCookies:chains completion:^{
-        self.view.userInteractionEnabled = YES;
+        NSArray *columns = [self.level fillHoles];
+        [self.scene animateFallingCookies:columns completion:^{
+            self.view.userInteractionEnabled = YES;
+        }];
     }];
 }
 
