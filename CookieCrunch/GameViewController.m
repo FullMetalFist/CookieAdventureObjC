@@ -63,7 +63,7 @@
         if ([self.level isPossibleSwap:swap]) {
             [self.level performSwap:swap];
             [self.scene animateSwap:swap completion:^{
-                self.view.userInteractionEnabled = YES;
+                [self handleMatches];
             }];
         } else {
             [self.scene animateInvalidSwap:swap completion:^{
@@ -87,6 +87,11 @@
 - (void)shuffle {
     NSSet *newCookies = [self.level shuffle];
     [self.scene addSpritesForCookies:newCookies];
+}
+
+- (void)handleMatches {
+    NSSet *chains = [self.level removeMatches];
+    // TODO: do something with this set
 }
 
 - (BOOL)shouldAutorotate
