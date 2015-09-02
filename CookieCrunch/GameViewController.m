@@ -98,8 +98,6 @@
             self.view.userInteractionEnabled = YES;
         }];
     }];
-    // TODO: do something with this set
-
 }
 
 - (BOOL)shouldAutorotate
