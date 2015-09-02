@@ -20,6 +20,7 @@ static const NSInteger NumRows = 9;
 - (instancetype)initWithFile:(NSString *)filename;
 
 - (NSSet *)shuffle;
+- (NSSet *)removeMatches;
 - (RWTCookie *)cookieAtColumn:(NSInteger)column row:(NSInteger)row;
 
 - (RWTTile *)tileAtColumn:(NSInteger)column row:(NSInteger)row;
