@@ -29,8 +29,6 @@ static const NSInteger NumRows = 9;
 
 - (BOOL) isPossibleSwap:(RWTSwap *)swap;
 
-- (NSSet *)removeMatches;
-
 - (NSArray *)fillHoles;
 
 @end
