@@ -194,40 +194,6 @@ static const CGFloat TileHeight = 36.0;
     }
 }
 
-- (void)animateSwap:(RWTSwap *)swap completion:(dispatch_block_t)completion {
-    // put the cookie you started with on top
-    swap.cookieA.sprite.zPosition = 100;
-    swap.cookieB.sprite.zPosition = 90;
-    
-    const NSTimeInterval Duration = 0.3;
-    
-    SKAction *moveA = [SKAction moveTo:swap.cookieB.sprite.position duration:Duration];
-    moveA.timingMode = SKActionTimingEaseOut;
-    [swap.cookieA.sprite runAction:[SKAction sequence:@[moveA, [SKAction runBlock:completion]]]];
-    
-    SKAction *moveB = [SKAction moveTo:swap.cookieA.sprite.position duration:Duration];
-    moveB.timingMode = SKActionTimingEaseOut;
-    [swap.cookieB.sprite runAction:moveB];
-    [self runAction:self.swapSound];
-}
-
-- (void)animateInvalidSwap:(RWTSwap *)swap completion:(dispatch_block_t)completion {
-    swap.cookieA.sprite.zPosition = 100;
-    swap.cookieB.sprite.zPosition = 90;
-    
-    const NSTimeInterval Duration = 0.2;
-    
-    SKAction *moveA = [SKAction moveTo:swap.cookieB.sprite.position duration:Duration];
-    moveA.timingMode = SKActionTimingEaseOut;
-    
-    SKAction *moveB = [SKAction moveTo:swap.cookieA.sprite.position duration:Duration];
-    moveB.timingMode = SKActionTimingEaseOut;
-    
-    [swap.cookieA.sprite runAction:[SKAction sequence:@[moveA, moveB, [SKAction runBlock:completion]]]];
-    [swap.cookieB.sprite runAction:[SKAction sequence:@[moveB, moveA]]];
-    [self runAction:self.invalidSwapSound];
-}
-
 - (void)showSelectionForCookie:(RWTCookie *)cookie {
     // if the selection indicator is still visible, then first remove it.
     if (self.selectionSprite.parent != nil) {
@@ -261,6 +227,42 @@ static const CGFloat TileHeight = 36.0;
     self.matchSound = [SKAction playSoundFileNamed:@"Ka-Ching.wav" waitForCompletion:NO];
     self.fallingCookieSound = [SKAction playSoundFileNamed:@"Scrape.wav" waitForCompletion:NO];
     self.addCookieSound = [SKAction playSoundFileNamed:@"Drip.wav" waitForCompletion:NO];
+}
+
+#pragma mark -- animate cookie methods
+
+- (void)animateSwap:(RWTSwap *)swap completion:(dispatch_block_t)completion {
+    // put the cookie you started with on top
+    swap.cookieA.sprite.zPosition = 100;
+    swap.cookieB.sprite.zPosition = 90;
+    
+    const NSTimeInterval Duration = 0.3;
+    
+    SKAction *moveA = [SKAction moveTo:swap.cookieB.sprite.position duration:Duration];
+    moveA.timingMode = SKActionTimingEaseOut;
+    [swap.cookieA.sprite runAction:[SKAction sequence:@[moveA, [SKAction runBlock:completion]]]];
+    
+    SKAction *moveB = [SKAction moveTo:swap.cookieA.sprite.position duration:Duration];
+    moveB.timingMode = SKActionTimingEaseOut;
+    [swap.cookieB.sprite runAction:moveB];
+    [self runAction:self.swapSound];
+}
+
+- (void)animateInvalidSwap:(RWTSwap *)swap completion:(dispatch_block_t)completion {
+    swap.cookieA.sprite.zPosition = 100;
+    swap.cookieB.sprite.zPosition = 90;
+    
+    const NSTimeInterval Duration = 0.2;
+    
+    SKAction *moveA = [SKAction moveTo:swap.cookieB.sprite.position duration:Duration];
+    moveA.timingMode = SKActionTimingEaseOut;
+    
+    SKAction *moveB = [SKAction moveTo:swap.cookieA.sprite.position duration:Duration];
+    moveB.timingMode = SKActionTimingEaseOut;
+    
+    [swap.cookieA.sprite runAction:[SKAction sequence:@[moveA, moveB, [SKAction runBlock:completion]]]];
+    [swap.cookieB.sprite runAction:[SKAction sequence:@[moveB, moveA]]];
+    [self runAction:self.invalidSwapSound];
 }
 
 - (void)animateMatchedCookies:(NSSet *)chains completion:(dispatch_block_t)completion {
@@ -311,6 +313,41 @@ static const CGFloat TileHeight = 36.0;
     }
     
     // 6
+    [self runAction:[SKAction sequence:@[[SKAction waitForDuration:longestDuration], [SKAction runBlock:completion]]]];
+}
+
+- (void)animateNewCookies:(NSArray *)columns completion:(dispatch_block_t)completion {
+    // 1
+    __block NSTimeInterval longestDuration = 0;
+    
+    for (NSArray *array in columns) {
+        // 2
+        NSInteger startRow = ((RWTCookie *)[array firstObject]).row + 1;
+        
+        [array enumerateObjectsUsingBlock:^(RWTCookie *cookie, NSUInteger idx, BOOL *stop) {
+            // 3
+            SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:[cookie spriteName]];
+            sprite.position  = [self pointForColumn:cookie.column row:startRow];
+            [self.cookiesLayer addChild:sprite];
+            cookie.sprite = sprite;
+            
+            // 4
+            NSTimeInterval delay = 0.1 + 0.2 * ([array count] - idx - 1);
+            
+            // 5
+            NSTimeInterval duration = (startRow - cookie.row) * 0.1;
+            longestDuration = MAX(longestDuration, duration + delay);
+            
+            // 6
+            CGPoint newPosition = [self pointForColumn:cookie.column row:cookie.row];
+            SKAction *moveAction = [SKAction moveTo:newPosition duration:duration];
+            moveAction.timingMode = SKActionTimingEaseOut;
+            cookie.sprite.alpha = 0;
+            [cookie.sprite runAction:[SKAction sequence:@[[SKAction waitForDuration:delay], [SKAction group:@[[SKAction fadeInWithDuration:0.05], moveAction, self.addCookieSound]]]]];
+        }];
+    }
+    
+    // 7
     [self runAction:[SKAction sequence:@[[SKAction waitForDuration:longestDuration], [SKAction runBlock:completion]]]];
 }
 

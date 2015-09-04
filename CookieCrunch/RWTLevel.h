@@ -30,5 +30,6 @@ static const NSInteger NumRows = 9;
 - (BOOL) isPossibleSwap:(RWTSwap *)swap;
 
 - (NSArray *)fillHoles;
+- (NSArray *)topUpCookies;
 
 @end

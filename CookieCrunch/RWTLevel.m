@@ -324,7 +324,7 @@
                         cookie.row = row;
                         
                         // 5
-                        if (nil == array) {
+                        if (array == nil) {
                             array = [NSMutableArray array];
                             [columns addObject:array];
                         }
@@ -335,6 +335,43 @@
                         break;
                     }
                 }
+            }
+        }
+    }
+    
+    return columns;
+}
+
+- (NSArray *)topUpCookies {
+    NSMutableArray *columns = [NSMutableArray array];
+    
+    NSUInteger cookieType = 0;
+    
+    for (NSInteger column = 0; column < NumColumns; column++) {
+        NSMutableArray *array;
+        
+        // 1
+        for (NSInteger row = NumRows - 1; row >= 0 && _cookies[column][row] == nil; row--) {
+            
+            // 2
+            if (_tiles[column][row] != nil) {
+                
+                // 3
+                NSUInteger newCookieType;
+                do {
+                    newCookieType = arc4random_uniform(NumCookieTypes) + 1;
+                } while (newCookieType == cookieType);
+                cookieType = newCookieType;
+                
+                // 4
+                RWTCookie *cookie = [self createCookieAtColumn:column row:row withType:cookieType];
+                
+                // 5
+                if (array == nil) {
+                    array = [NSMutableArray array];
+                    [columns addObject:array];
+                }
+                [array addObject:cookie];
             }
         }
     }
