@@ -227,6 +227,8 @@ static const CGFloat TileHeight = 36.0;
     self.matchSound = [SKAction playSoundFileNamed:@"Ka-Ching.wav" waitForCompletion:NO];
     self.fallingCookieSound = [SKAction playSoundFileNamed:@"Scrape.wav" waitForCompletion:NO];
     self.addCookieSound = [SKAction playSoundFileNamed:@"Drip.wav" waitForCompletion:NO];
+    
+    [SKLabelNode labelNodeWithFontNamed:@"GillSans-Bold"];
 }
 
 #pragma mark -- animate cookie methods
@@ -267,6 +269,9 @@ static const CGFloat TileHeight = 36.0;
 
 - (void)animateMatchedCookies:(NSSet *)chains completion:(dispatch_block_t)completion {
     for (RWTChain *chain in chains) {
+        
+        [self animateScoreForChain:chain];
+        
         for (RWTCookie *cookie in chain.cookies) {
             // 1
             if (cookie.sprite) {
@@ -349,6 +354,27 @@ static const CGFloat TileHeight = 36.0;
     
     // 7
     [self runAction:[SKAction sequence:@[[SKAction waitForDuration:longestDuration], [SKAction runBlock:completion]]]];
+}
+
+- (void)animateScoreForChain:(RWTChain *)chain {
+    // Figure out what the midpoint of the chain is.
+    RWTCookie *firstCookie = [chain.cookies firstObject];
+    RWTCookie *lastCookie = [chain.cookies lastObject];
+    CGPoint centerPosition = CGPointMake(
+     (firstCookie.sprite.position.x + lastCookie.sprite.position.x) / 2,
+     (firstCookie.sprite.position.y + lastCookie.sprite.position.y) / 2 - 8);
+    
+    // Add a label for the score that slowly floats up.
+    SKLabelNode *scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"GillSans-Bold"];
+    scoreLabel.fontSize = 16;
+    scoreLabel.text = [NSString stringWithFormat:@"%lu", (long)chain.score];
+    scoreLabel.position = centerPosition;
+    scoreLabel.zPosition = 300;
+    [self.cookiesLayer addChild:scoreLabel];
+    
+    SKAction *moveAction = [SKAction moveBy:CGVectorMake(0, 3) duration:0.7];
+    moveAction.timingMode = SKActionTimingEaseOut;
+    [scoreLabel runAction:[SKAction sequence:@[moveAction, [SKAction removeFromParent]]]];
 }
 
 @end

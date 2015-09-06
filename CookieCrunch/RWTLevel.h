@@ -17,6 +17,9 @@ static const NSInteger NumRows = 9;
 
 @interface RWTLevel : NSObject
 
+@property (assign, nonatomic) NSUInteger targetScore;
+@property (assign, nonatomic) NSUInteger maximumMoves;
+
 - (instancetype)initWithFile:(NSString *)filename;
 
 - (NSSet *)shuffle;
@@ -31,5 +34,7 @@ static const NSInteger NumRows = 9;
 
 - (NSArray *)fillHoles;
 - (NSArray *)topUpCookies;
+
+- (void)detectPossibleSwaps;
 
 @end

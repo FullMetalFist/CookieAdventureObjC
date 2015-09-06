@@ -16,6 +16,13 @@
 @property (nonatomic) RWTLevel *level;
 @property (nonatomic) RWTGameScene *scene;
 
+@property (assign, nonatomic) NSUInteger movesLeft;
+@property (assign, nonatomic) NSUInteger score;
+
+@property (weak, nonatomic) IBOutlet UILabel *targetsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *movesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+
 @end
 
 @implementation SKScene (Unarchive)
@@ -81,6 +88,9 @@
 }
 
 - (void)beginGame {
+    self.movesLeft = self.level.maximumMoves;
+    self.score = 0;
+    [self updateLabels];
     [self shuffle];
 }
 
@@ -92,14 +102,35 @@
 - (void)handleMatches {
     NSSet *chains = [self.level removeMatches];
     
+    if ([chains count] == 0) {
+        [self beginNextTurn];
+        return;
+    }
+    
     [self.scene animateMatchedCookies:chains completion:^{
+        for (RWTChain *chain in chains) {
+            self.score += chain.score;
+        }
+        [self updateLabels];
+        
         NSArray *columns = [self.level fillHoles];
         [self.scene animateFallingCookies:columns completion:^{
             [self.scene animateNewCookies:columns completion:^{
-                self.view.userInteractionEnabled = YES;
+                [self handleMatches];
             }];
         }];
     }];
+}
+
+- (void)beginNextTurn {
+    [self.level detectPossibleSwaps];
+    self.view.userInteractionEnabled = YES;
+}
+
+- (void)updateLabels {
+    self.targetsLabel.text = [NSString stringWithFormat:@"%lu", (long)self.level.targetScore];
+    self.movesLabel.text = [NSString stringWithFormat:@"%lu", (long)self.movesLeft];
+    self.scoreLabel.text = [NSString stringWithFormat:@"%lu", (long)self.score];
 }
 
 - (BOOL)shouldAutorotate
