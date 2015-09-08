@@ -45,6 +45,7 @@ static const CGFloat TileHeight = 36.0;
         [self addChild:background];
         
         self.gameLayer = [SKNode node];
+        self.gameLayer.hidden = YES;
         [self addChild:self.gameLayer];
         
         CGPoint layerPosition = CGPointMake(-TileWidth * NumColumns/2, -TileHeight * NumRows/2);
@@ -375,6 +376,25 @@ static const CGFloat TileHeight = 36.0;
     SKAction *moveAction = [SKAction moveBy:CGVectorMake(0, 3) duration:0.7];
     moveAction.timingMode = SKActionTimingEaseOut;
     [scoreLabel runAction:[SKAction sequence:@[moveAction, [SKAction removeFromParent]]]];
+}
+
+- (void)animateGameOver {
+    SKAction *action = [SKAction moveBy:CGVectorMake(0, -self.size.height) duration:0.3];
+    action.timingMode = SKActionTimingEaseIn;
+    [self.gameLayer runAction:action];
+}
+
+- (void)animateBeginGame {
+    self.gameLayer.hidden = NO;
+    
+    self.gameLayer.position = CGPointMake(0, self.size.height);
+    SKAction *action = [SKAction moveBy:CGVectorMake(0, -self.size.height) duration:0.3];
+    action.timingMode = SKActionTimingEaseOut;
+    [self.gameLayer runAction:action];
+}
+
+- (void)removeAllCookieSprites {
+    [self.cookiesLayer removeAllChildren];
 }
 
 @end

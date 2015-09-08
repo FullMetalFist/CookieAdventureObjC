@@ -12,6 +12,8 @@
 
 @property (nonatomic) NSSet *possibleSwaps;
 
+@property (assign, nonatomic) NSUInteger comboMultiplier;
+
 @end
 
 @implementation RWTLevel {
@@ -387,8 +389,13 @@
 
 - (void)calculateScores:(NSSet *)chains {
     for (RWTChain *chain in chains) {
-        chain.score = 60 * ([chain.cookies count] - 2);
+        chain.score = 60 * ([chain.cookies count] - 2) * self.comboMultiplier;
+        self.comboMultiplier++;
     }
+}
+
+- (void)resetComboMultiplier {
+    self.comboMultiplier = 1;
 }
 
 @end
